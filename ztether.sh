@@ -48,6 +48,8 @@ fi
   # move up - this always select first list item
   $adb shell input keyevent 19
 sleep 1
+
+
 case $MYTETHER in 
         wifi)
           $adb shell input keyevent 20
@@ -86,23 +88,6 @@ esac
   $adb shell input keyevent 26
 }
 
-tether_enable() {
-#  if rndis_enabled ; then
-#    echo "Tethering already enabled"
-#    return
-#  fi
-
-  echo "Toggle tethering checkbox"
-  tether_toggle
-}
-tether_disable() {
-#  if rndis_enabled ; then
-       echo "Toggle tethering checkbox"
-       tether_toggle   
-#    return
-#  fi
-#       echo "Tethering already disabled"
-}
 
 
 
