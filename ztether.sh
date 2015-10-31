@@ -48,7 +48,7 @@ fi
   # move up - this always select first list item
   $adb shell input keyevent 19
 sleep 1
-case $MYTETHER$2 in 
+case $MYTETHER in 
         wifi)
           $adb shell input keyevent 20
           $adb shell input keyevent 20 
@@ -58,6 +58,12 @@ case $MYTETHER$2 in
            $adb shell input keyevent 20 
                     sleep 1 
                   ;;
+          usb)
+             if rndis_enabled ; then
+    echo "Tethering already enabled ... disabling..."
+    fi
+
+
 esac
  
 
@@ -101,7 +107,7 @@ tether_disable() {
 
 
 # Main program
-case $2 in
+case $1 in
   usb)
     MYTETHER="usb"
              ;;
@@ -112,7 +118,7 @@ case $2 in
     MYTETHER="bt"
               ;;
    *)
-   error "Which network device?"
+   error "Which network device usb / bt / wifi?"
     ;;
 esac
 
@@ -122,17 +128,4 @@ if ! adb_check ; then
 fi
 
 
-case $1 in
-  start)
-    echo "Starting USB Tethering..."
-    tether_enable
-    ;;
-  stop)
-    echo "Stopping USB Tether"
-    tether_disable
-    ;;
-  *)
-      echo "choose Option stop / start"
-    ;;
-esac
-
+tether_toggle
